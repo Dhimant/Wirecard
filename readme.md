@@ -1,17 +1,32 @@
+# Wirecard-Payment-Gateway-Magento-2
+Wirecard Payment Gateway for magento 2
 
-Installation & Instructions 
+**How to setup** 
 
--- simply copy and paste the Czar folder in 'app' directory  within your mangeto 2 installation .
--- go to admin->dashboard->stores->configuration->sales->Payment Methods->WireCard by CzarGroup
--- Default configuration is a valid testing data. You can update it as you please. 
--- Wirecard currency and store currency should match. 
--- Demo card for testing purpose Visa : 9400000000000004       
--- Rest of the card values can be anything. 
+Put these files/Directories within app/Czar/Wirecard in your magento installation. 
+
+After that run the following commands from your magento installation 
 
 
-Api end point: 
+php bin/magento setup:upgrade
+php bin/magento module:enable Czar/Wirecard
 
-Bin verification : 
-http://127.0.0.1/your_magento_installation/rest/V1/bin/number/112233
+You can find settings for the module inside admin area. 
 
-where 112233 is a bin number. 
+Store --> Configuration --> Sales -> Payment Methods -> Wirecard 
+
+Following Settings are available. 
+
+Enabled : Yes, No
+Title : Title you want to appear on checkout page. 
+Payment for Applicable Countries : select country for which you want to enable the payment gateway. 
+Wirecard Language : language code 
+Wirecard Currency : Currency to use for checkout. 
+Failure url : URL to which costomer will be redirect after an unsuccessful payment. 
+Instructions : Instruction for the customer on checkout Page. 
+Success URL : Redirects to this url after successful payment. 
+Wirecard Customer ID : Your wirecard customer ID. 
+Sort Order : 
+
+
+
