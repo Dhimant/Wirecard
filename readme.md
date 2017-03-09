@@ -18,14 +18,23 @@ Store --> Configuration --> Sales -> Payment Methods -> Wirecard
 Following Settings are available. 
 
 Enabled : Yes, No
+
 Title : Title you want to appear on checkout page. 
+
 Payment for Applicable Countries : select country for which you want to enable the payment gateway. 
+
 Wirecard Language : language code 
+
 Wirecard Currency : Currency to use for checkout. 
+
 Failure url : URL to which costomer will be redirect after an unsuccessful payment. 
+
 Instructions : Instruction for the customer on checkout Page. 
+
 Success URL : Redirects to this url after successful payment. 
+
 Wirecard Customer ID : Your wirecard customer ID. 
+
 Sort Order : 
 
 
