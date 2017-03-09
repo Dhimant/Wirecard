@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Store/etc/config.xsd">
+    <default>
+        <payment>
+                <wirecardpayment>
+                <active>1</active>
+                <title>WireCardPayment</title>
+                <order_status>pending_payment</order_status> 
+                <instructions>Instruction.</instructions>
+                <successurl>checkout/onepage/success</successurl>
+                <failureurl>checkout/onepage/failure</failureurl>
+                <customerid>D200001</customerid>
+                <secret>B8AKTPWBRMNBV455FG6M2DANE99WU2</secret>
+                <language>en</language>
+                <currency>SGD</currency>
+                <bins>123456,654321</bins>
+                <payment_action>true</payment_action>
+                <model>Czar\Wirecard\Model\WireCardPayment</model>
+                <group>offline</group>
+            </wirecardpayment>
+            <!-- payment-config -->
+        </payment>
+    </default>
+</config>

@@ -1,0 +1,37 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="standard">
+        <route id="czar_redirect" frontName="czar_redirect">
+            <module name="Czar_Wirecard"/>
+        </route>
+   
+        <route id="czar_response" frontName="czar_response">
+            <module name="Czar_Wirecard"/>
+        </route>
+
+        <route id="czar_verify" frontName="czar_verify">
+            <module name="Czar_Wirecard"/>
+        </route>
+
+        <route id="czar_success" frontName="czar_success">
+            <module name="Czar_Wirecard"/>
+        </route>
+
+         <route id="czar_cancel" frontName="czar_cancel">
+            <module name="Czar_Wirecard"/>
+        </route>
+
+        <route id="czar_failure" frontName="czar_failure">
+            <module name="Czar_Wirecard"/>
+        </route>
+
+        <route id="czar_pending" frontName="czar_pending">
+            <module name="Czar_Wirecard"/>
+        </route>
+
+        <route id="czar_bins" frontName="czar_bins">
+            <module name="Czar_Wirecard"/>
+        </route>
+
+    </router>
+
+</config>
