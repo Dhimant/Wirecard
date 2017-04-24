@@ -1,6 +1,6 @@
 <?php
-namespace Czar\Wirecard\Model;
-use Czar\Wirecard\Api\BinInterface;
+namespace Dhimant\Wirecard\Model;
+use Dhimant\Wirecard\Api\BinInterface;
  
 class Bin implements BinInterface
 {
@@ -42,6 +42,5 @@ class Bin implements BinInterface
             return $result;
         }
 
-        //return "Hello, " . $name;
     }
 }

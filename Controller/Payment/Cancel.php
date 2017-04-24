@@ -1,8 +1,6 @@
 <?php
 
-namespace Czar\Wirecard\Controller\Payment;
-use Magento\Framework\Controller\ResultFactory;
-
+namespace Dhimant\Wirecard\Controller\Payment;
 
 class Cancel extends \Magento\Framework\App\Action\Action
 {
@@ -36,7 +34,10 @@ class Cancel extends \Magento\Framework\App\Action\Action
         \Magento\Sales\Model\OrderFactory $OrderFactory,
         \Psr\Log\LoggerInterface $logger,
         \Magento\Sales\Model\Order $order,
-        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
+        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
+        \Magento\Config\Model\ResourceModel\Config $resourceConfig,
+        \Magento\Framework\View\Result\PageFactory $resultPageFactory,
+        \Magento\Framework\App\Filesystem\DirectoryList $directory_list
     ) {
         $this->resultForwardFactory = $resultForwardFactory;
         $this->layoutFactory = $layoutFactory;
@@ -45,6 +46,9 @@ class Cancel extends \Magento\Framework\App\Action\Action
         $this->_logger = $logger;
         $this->_order = $order;
         $this->_scopeConfig = $scopeConfig;
+        $this->directory_list = $directory_list;  
+        $this->resourceConfig = $resourceConfig;
+        $this->resultPageFactory = $resultPageFactory;
         parent::__construct($context);
     }
 
@@ -55,31 +59,37 @@ class Cancel extends \Magento\Framework\App\Action\Action
     {
 
             $response = $_REQUEST;
-            
-            if($response['paymentState']=='CANCEL' && !empty($response['shoporderReference']))
+
+             
+            if($response['paymentState']=='CANCEL' && !empty($response['shoporderReference']) && isset($response['paymentState']))
             {
+                
                 $orderId = $response['shoporderReference'];
                 $order_ref = $this->_order->load($orderId);
-                //$order_ref->setState("canceled")->setStatus("canceled");
-                $order_ref->addStatusHistoryComment('Order canceled by Wirecard');
-                //$order_ref->save();
-                $order_ref->cancel()->save();
-
-              
-
-                $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
+                $order_ref->setState("canceled")->setStatus("canceled");
+                $order_ref->addStatusHistoryComment('Order canceled by Customer (Wirecard).')->setIsCustomerNotified(false);
+                $order_ref->setBinNumber($binNumber);
+                $order_ref->save();
+                        
+                $resultRedirect = $this->resultRedirectFactory->create();
                 $storeScope = \Magento\Store\Model\ScopeInterface::SCOPE_STORE;
                 $redirectPath = $this->_scopeConfig->getValue('payment/wirecardpayment/failureurl', $storeScope);
-                return $resultRedirect->setPath($redirectPath);
+              
+                if($redirectPath=="checkout/onepage/failure") // Default
+                {
+                $resultPage = $this->resultPageFactory->create();
+                $resultPage->addHandle('checkout_onepage_failure_dhimant');
+                return $resultPage;               
+                }
+                else {
+                   $resultRedirect->setPath($redirectPath);
+                   return $resultRedirect;
+                }
 
 
-                //$resultRedirect = $this->resultRedirectFactory->create();
-               
                 
-                //$resultRedirect->setPath($redirectPath);
-
-                //return $resultRedirect;
             }
+
 
 
 

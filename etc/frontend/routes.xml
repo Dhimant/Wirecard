@@ -1,35 +1,51 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
     <router id="standard">
-        <route id="czar_redirect" frontName="czar_redirect">
-            <module name="Czar_Wirecard"/>
+        <route id="dhimant_redirect" frontName="dhimant_redirect">
+            <module name="Dhimant_Wirecard"/>
         </route>
    
-        <route id="czar_response" frontName="czar_response">
-            <module name="Czar_Wirecard"/>
+        <route id="dhimant_response" frontName="dhimant_response">
+            <module name="Dhimant_Wirecard"/>
         </route>
 
-        <route id="czar_verify" frontName="czar_verify">
-            <module name="Czar_Wirecard"/>
+        <route id="dhimant_verify" frontName="dhimant_verify">
+            <module name="Dhimant_Wirecard"/>
         </route>
 
-        <route id="czar_success" frontName="czar_success">
-            <module name="Czar_Wirecard"/>
+        <route id="dhimant_success" frontName="dhimant_success">
+            <module name="Dhimant_Wirecard"/>
         </route>
 
-         <route id="czar_cancel" frontName="czar_cancel">
-            <module name="Czar_Wirecard"/>
+         <route id="dhimant_cancel" frontName="dhimant_cancel">
+            <module name="Dhimant_Wirecard"/>
         </route>
 
-        <route id="czar_failure" frontName="czar_failure">
-            <module name="Czar_Wirecard"/>
+        <route id="dhimant_failure" frontName="dhimant_failure">
+            <module name="Dhimant_Wirecard"/>
         </route>
 
-        <route id="czar_pending" frontName="czar_pending">
-            <module name="Czar_Wirecard"/>
+        <route id="dhimant_pending" frontName="dhimant_pending">
+            <module name="Dhimant_Wirecard"/>
         </route>
 
-        <route id="czar_bins" frontName="czar_bins">
-            <module name="Czar_Wirecard"/>
+        <route id="dhimant_bins" frontName="dhimant_bins">
+            <module name="Dhimant_Wirecard"/>
+        </route>
+
+        <route id="dhimant_disable_email" frontName="dhimant_disable_email">
+            <module name="Dhimant_Wirecard"/>
+        </route>
+
+        <route id="dhimant_enable_email" frontName="dhimant_enable_email">
+            <module name="Dhimant_Wirecard"/>
+        </route>
+
+        <route id="dhimant_bin_session" frontName="dhimant_bin_session">
+            <module name="Dhimant_Wirecard"/>
+        </route>
+
+        <route id="dhimant_set_pending" frontName="dhimant_set_pending">
+            <module name="Dhimant_Wirecard"/>
         </route>
 
     </router>

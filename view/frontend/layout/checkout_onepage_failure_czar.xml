@@ -9,7 +9,7 @@
     <body>
         <referenceBlock name="page.main.title">
             <action method="setPageTitle">
-                <argument translate="true" name="title" xsi:type="string">Your order is cancelled. !</argument>
+                <argument translate="true" name="title" xsi:type="string">Unsuccessful Transaction !</argument>
             </action>
         </referenceBlock>
         <referenceContainer name="content">

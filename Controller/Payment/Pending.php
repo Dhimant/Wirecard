@@ -1,6 +1,6 @@
 <?php
 
-namespace Czar\Wirecard\Controller\Payment;
+namespace Dhimant\Wirecard\Controller\Payment;
 
 class Pending extends \Magento\Framework\App\Action\Action
 {
@@ -34,6 +34,7 @@ class Pending extends \Magento\Framework\App\Action\Action
         \Magento\Sales\Model\OrderFactory $OrderFactory,
         \Psr\Log\LoggerInterface $logger,
         \Magento\Sales\Model\Order $order,
+        \Magento\Config\Model\ResourceModel\Config $resourceConfig,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
     ) {
         $this->resultForwardFactory = $resultForwardFactory;
@@ -43,6 +44,8 @@ class Pending extends \Magento\Framework\App\Action\Action
         $this->_logger = $logger;
         $this->_order = $order;
         $this->_scopeConfig = $scopeConfig;
+        $this->resourceConfig = $resourceConfig;
+
         parent::__construct($context);
     }
 
@@ -59,11 +62,11 @@ class Pending extends \Magento\Framework\App\Action\Action
                 $orderId = $response['shoporderReference'];
                 $order_ref = $this->_order->load($orderId);
                 $order_ref->setState("pending")->setStatus("pending");
-                $order_ref->addStatusHistoryComment('Payment verification pending by wirecard');
+                $order_ref->addStatusHistoryComment('Payment verification pending by wirecard. ')->setIsCustomerNotified(false);
+                $order_ref->setBinNumber($binNumber);
                 $order_ref->save();
 
-                $resultRedirect = $this->resultRedirectFactory->create();
-                
+                $resultRedirect = $this->resultRedirectFactory->create();                
                 $storeScope = \Magento\Store\Model\ScopeInterface::SCOPE_STORE;
                 $redirectPath = $this->_scopeConfig->getValue('payment/wirecardpayment/failureurl', $storeScope);
                 $resultRedirect->setPath($redirectPath);

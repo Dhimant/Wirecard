@@ -23,7 +23,7 @@
                                                             <item name="children" xsi:type="array">
                                                             <!-- merge payment method renders here -->
                                                                 <item name="wirecard-wirecardpayment" xsi:type="array">
-                                                                    <item name="component" xsi:type="string">Czar_Wirecard/js/view/payment/wirecardpayment</item>
+                                                                    <item name="component" xsi:type="string">Dhimant_Wirecard/js/view/payment/wirecardpayment</item>
                                                                     <item name="methods" xsi:type="array">                       
 																		 <item name="wirecardpayment" xsi:type="array">
                                                                             <item name="isBillingAddressRequired" xsi:type="boolean">true</item>

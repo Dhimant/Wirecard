@@ -1,6 +1,6 @@
 <?php
 
-namespace Czar\Wirecard\Controller\Payment;
+namespace Dhimant\Wirecard\Controller\Payment;
 
 class Redirect extends \Magento\Framework\App\Action\Action
 {
@@ -34,6 +34,8 @@ class Redirect extends \Magento\Framework\App\Action\Action
         \Magento\Sales\Model\OrderFactory $OrderFactory,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Sales\Model\Order $order,
+        \Magento\Config\Model\ResourceModel\Config $resourceConfig,
+        \Magento\Checkout\Model\Session $checkoutSession,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
 
     ) {
@@ -44,6 +46,9 @@ class Redirect extends \Magento\Framework\App\Action\Action
         $this->_storeManager = $storeManager;
         $this->_order = $order;
         $this->_scopeConfig = $scopeConfig;
+        $this->resourceConfig = $resourceConfig;
+        $this->checkoutSession = $checkoutSession;
+
         parent::__construct($context);
     }
 
@@ -52,19 +57,9 @@ class Redirect extends \Magento\Framework\App\Action\Action
      */
     public function execute()
     {
-        /*
-        http://127.0.0.1/czar_project_one/czar_redirect/payment/redirect/   
-        */
-
         $payment_page_url = 'https://checkout.wirecard.com/page/init.php' ;
         $incrementId = $this->_checkoutSession->getLastRealOrder()->getIncrementId();
         $orderId = $this->_checkoutSession->getLastOrderId();
-
-        /* Set Order status to pending using orderId */
-        
-        $order_ref = $this->_order->load($orderId);
-        $order_ref->setStatus("pending");
-        $order_ref->save();
 
         $last_order = $this->_checkoutSession->getLastRealOrder();     
         $price =  $last_order->getGrandTotal();
@@ -72,28 +67,18 @@ class Redirect extends \Magento\Framework\App\Action\Action
         $price = round($price, 2);
         $price = number_format((float)$price, 2, '.', '');
         $price = (string)$price;
-        
 
         $storeScope = \Magento\Store\Model\ScopeInterface::SCOPE_STORE;
         $customerId = $this->_scopeConfig->getValue('payment/wirecardpayment/customerid', $storeScope);
         $secret = $this->_scopeConfig->getValue('payment/wirecardpayment/secret', $storeScope);
         $language = $this->_scopeConfig->getValue('payment/wirecardpayment/language', $storeScope);
-        $currency = $this->_scopeConfig->getValue('payment/wirecardpayment/currency', $storeScope);
-
-        // New Parameters 
-        /*
-        $customerId  = 'D200001';
-        $secret = 'B8AKTPWBRMNBV455FG6M2DANE99WU2';
-        $language  = 'en';
-        $currency = 'SGD';
-        */
-        
+        $currency = $this->_scopeConfig->getValue('payment/wirecardpayment/currency', $storeScope);              
         $base_url = $this->_storeManager->getStore()->getBaseUrl();
-        $successUrl = $base_url."czar_success/payment/success";
-        $cancelUrl  = $base_url."czar_cancel/payment/cancel";
-        $failureUrl = $base_url."czar_failure/payment/failure";
-        $pendingUrl = $base_url."czar_pending/payment/pending";
-        $serviceUrl = $base_url."czar_pending/payment/service";
+        $successUrl = $base_url."dhimant_success/payment/success";
+        $cancelUrl  = $base_url."dhimant_cancel/payment/cancel";
+        $failureUrl = $base_url."dhimant_failure/payment/failure";
+        $pendingUrl = $base_url."dhimant_pending/payment/pending";
+        $serviceUrl = $base_url."dhimant_pending/payment/service";
         $paymentType = 'SELECT';
         $amount = $price;
         $orderDescription  = 'Test Payment';
@@ -127,7 +112,6 @@ $form =<<<END
 document.easypayform.submit();
 </script>s
 END;
-
 echo $form;
 
     }

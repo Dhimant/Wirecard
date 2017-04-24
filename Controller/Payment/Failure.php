@@ -1,6 +1,6 @@
 <?php
 
-namespace Czar\Wirecard\Controller\Payment;
+namespace Dhimant\Wirecard\Controller\Payment;
 
 class Failure extends \Magento\Framework\App\Action\Action
 {
@@ -34,6 +34,9 @@ class Failure extends \Magento\Framework\App\Action\Action
         \Magento\Sales\Model\OrderFactory $OrderFactory,
         \Psr\Log\LoggerInterface $logger,
         \Magento\Sales\Model\Order $order,
+        \Magento\Config\Model\ResourceModel\Config $resourceConfig,
+        \Magento\Framework\App\Filesystem\DirectoryList $directory_list,
+        \Magento\Framework\View\Result\PageFactory $resultPageFactory,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
     ) {
         $this->resultForwardFactory = $resultForwardFactory;
@@ -43,6 +46,11 @@ class Failure extends \Magento\Framework\App\Action\Action
         $this->_logger = $logger;
         $this->_order = $order;
         $this->_scopeConfig = $scopeConfig;
+        $this->resourceConfig = $resourceConfig;
+        $this->directory_list = $directory_list;
+        $this->resultPageFactory = $resultPageFactory;
+
+
         parent::__construct($context);
     }
 
@@ -59,15 +67,23 @@ class Failure extends \Magento\Framework\App\Action\Action
                 $orderId = $response['shoporderReference'];
                 $order_ref = $this->_order->load($orderId);
                 $order_ref->setState("canceled")->setStatus("canceled");
-                $order_ref->addStatusHistoryComment('Transaction declined by Wirecard');
+                $order_ref->addStatusHistoryComment('Transaction declined by Wirecard')->setIsCustomerNotified(false);
                 $order_ref->save();
 
                 $resultRedirect = $this->resultRedirectFactory->create();
                 $storeScope = \Magento\Store\Model\ScopeInterface::SCOPE_STORE;
                 $redirectPath = $this->_scopeConfig->getValue('payment/wirecardpayment/failureurl', $storeScope);
-                $resultRedirect->setPath($redirectPath);
-  
-                return $resultRedirect;
+              
+                if($redirectPath=="checkout/onepage/failure")
+                {
+                $resultPage = $this->resultPageFactory->create();
+                $resultPage->addHandle('checkout_onepage_failure_dhimant');
+                return $resultPage;               
+                }
+                else {
+                   $resultRedirect->setPath($redirectPath);
+                   return $resultRedirect;
+                }
             }
 
 

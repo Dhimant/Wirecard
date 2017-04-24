@@ -1,15 +1,9 @@
 <?xml version="1.0"?>
-<!--
-/**
- * Copyright © 2015 Magento. All rights reserved.
- * See COPYING.txt for license details.
- */
--->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Config/etc/system_file.xsd">
     <system>
         <section id="payment">
             <group id="wirecardpayment" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
-                <label>Wirecard By CzarGroup</label>
+                <label>Wirecard Payment Gateway by Dhimant Patel</label>
                 <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Enabled</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -18,10 +12,10 @@
                     <label>Title</label>
                 </field>
                
-                <!-- <field id="order_status" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="order_status" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>New Order Status</label>
-                    <source_model>Czar\Wirecard\Model\Config\Source\Order\Status\Pendingpayment</source_model>
-                </field> -->
+                    <source_model>Dhimant\Wirecard\Model\Config\Source\Order\Status\Pendingpayment</source_model>
+                </field> 
               
                 <field id="allowspecific" translate="label" type="allowspecific" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Payment from Applicable Countries</label>
@@ -58,10 +52,6 @@
 
                 <field id="currency" translate="label" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Wirecard Currency</label>
-                </field>
-
-                 <field id="bins" translate="label" type="textarea" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Bin (Comma Seperated) </label>
                 </field>
 
                 <field id="sort_order" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0">

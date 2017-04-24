@@ -3,7 +3,7 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Czar\Wirecard\Model;
+namespace Dhimant\Wirecard\Model;
 
 
 
@@ -25,7 +25,7 @@ class WireCardPayment extends \Magento\Payment\Model\Method\AbstractMethod
      *
      * @var bool
      */
-    protected $_isOffline = true;
+    protected $_isOffline = false;
 
 
   

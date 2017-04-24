@@ -17,7 +17,7 @@ define(
         rendererList.push(
             {
                 type: 'wirecardpayment',
-                component: 'Czar_Wirecard/js/view/payment/method-renderer/wirecardpayment-method'
+                component: 'Dhimant_Wirecard/js/view/payment/method-renderer/wirecardpayment-method'
             }
         );
         /** Add view logic here if needed */
