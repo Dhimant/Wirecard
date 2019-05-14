@@ -1,3 +1,5 @@
+# This module is no longer maintained by me, should only be used for educational purpose.
+
 # Wirecard-Payment-Gateway-Magento-2
 Wirecard Payment Gateway for magento 2
 
@@ -10,7 +12,7 @@ You can learn more about that here
 
 [https://guides.wirecard.com/wcp:start](https://guides.wirecard.com/wcp:start)
 
-** How to setup **
+**How to setup**
 
 1. Create a folder named 'Dhimant' in app/code/ .
 2. Copy the Wirecard folder within 'Dhimant'.
